@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  node-api:
+    container_name: node_container
+    build: ./server
+    ports:
+      - "5000:5000"
+    restart: always
+    networks:
+      - mern-network
+    depends_on:
+      - mongo-db
+
+  mongo-db:
+    container_name: mongo_container
+    image: mongo
+    networks:
+      - mern-network
+    ports:
+      - "27017:27017"
+
+  frontend:
+    container_name: frontend_container
+    build: ./fr2
+    networks:
+      - mern-network
+    ports:
+      - "7000:7000"
+    depends_on:
+      - node-api
+    stdin_open: true
+    tty: true
+  jenkins:
+    container_name: jenkins_container
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - jenkins_agent:/var/jenkins_agent
+
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+  jenkins_home:
+  jenkins_agent:
