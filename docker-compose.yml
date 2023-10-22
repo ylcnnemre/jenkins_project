@@ -39,11 +39,6 @@ services:
       - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-    networks:
-      - mern-network
-    environment:
-      - JENKINS_ADMIN_ID=admin
-      - JENKINS_ADMIN_PASSWORD=admin
 
 networks:
   mern-network:
