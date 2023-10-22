@@ -31,6 +31,7 @@ services:
       - node-api
     stdin_open: true
     tty: true
+
   jenkins:
     container_name: jenkins_container
     image: jenkins/jenkins:lts
@@ -38,7 +39,11 @@ services:
       - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - jenkins_agent:/var/jenkins_agent
+    networks:
+      - mern-network
+    environment:
+      - JENKINS_ADMIN_ID=admin
+      - JENKINS_ADMIN_PASSWORD=admin
 
 networks:
   mern-network:
@@ -46,4 +51,3 @@ networks:
 
 volumes:
   jenkins_home:
-  jenkins_agent:

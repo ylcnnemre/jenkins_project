@@ -1,0 +1,9 @@
+# Node.js Backend için
+node_modules
+npm-debug.log
+
+# React Frontend için
+build
+node_modules
+npm-debug.log
+.env
