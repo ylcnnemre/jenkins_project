@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  jenkins:
+    container_name: jenkins_container
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - mern-network
+      - jenkins-network
+
+networks:
+  mern-network:
+    external: true
+  jenkins-network:
+    driver: bridge
+
+volumes:
+  jenkins_home:
